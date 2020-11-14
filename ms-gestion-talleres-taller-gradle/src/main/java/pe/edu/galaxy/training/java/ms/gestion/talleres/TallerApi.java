@@ -11,6 +11,6 @@ public class TallerApi {
 	@GetMapping
 	public String demo() {
 		
-		return "Hola Mundo";
+		return "Hola Mundo--Gradle";
 	}
 }
