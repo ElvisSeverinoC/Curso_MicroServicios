@@ -1,0 +1,5 @@
+#Applicatino configuration
+server:
+   port : 9091
+   servlet:
+      context-path: /ms-gestion-talleres-maven-yml

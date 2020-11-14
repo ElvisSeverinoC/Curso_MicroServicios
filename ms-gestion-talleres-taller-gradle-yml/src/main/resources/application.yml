@@ -1,0 +1,5 @@
+#Applicatino configuration
+server:
+   port : 9092
+   servlet:
+      context-path: /ms-gestion-talleres-gradle-yml
