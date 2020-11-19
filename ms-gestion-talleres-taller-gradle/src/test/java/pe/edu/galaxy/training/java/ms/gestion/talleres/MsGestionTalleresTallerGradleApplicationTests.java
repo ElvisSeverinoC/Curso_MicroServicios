@@ -1,6 +1,7 @@
-package pe.edu.galaxy.training.java.ms.gestion.talleres.msgestiontallerestallergradle;
+package pe.edu.galaxy.training.java.ms.gestion.talleres;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest

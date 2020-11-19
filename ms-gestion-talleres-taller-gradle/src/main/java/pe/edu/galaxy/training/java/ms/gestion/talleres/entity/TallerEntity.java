@@ -36,7 +36,7 @@ public class TallerEntity extends GenericEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTaller")
 	@SequenceGenerator(name = "seqTaller", allocationSize = 1, sequenceName = "SEQ_TALLER")
-	@Column(name = "ID")
+	@Column(name = "ID_TALLER")
 	private Long id;
 
 	@Size(min = 5, max = 280, message = "El nombre es requerido y debe tener como minimo 5 y como maximo 280 caracteres")
@@ -55,4 +55,7 @@ public class TallerEntity extends GenericEntity {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "ID_TALLER_SITUACION")
 	private TallerSituacionEntity tallerSituacion; 
+	
+	@Column(name="ID_INSTRUCTOR")
+	private Integer idInstructor;
 }

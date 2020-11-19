@@ -12,7 +12,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import pe.edu.galaxy.training.java.ms.gestion.talleres.dto.TallerDTO;
+import pe.edu.galaxy.training.java.ms.gestion.talleres.dto.TallerSituacionDTO;
 import pe.edu.galaxy.training.java.ms.gestion.talleres.entity.TallerEntity;
+import pe.edu.galaxy.training.java.ms.gestion.talleres.entity.TallerSituacionEntity;
 import pe.edu.galaxy.training.java.ms.gestion.talleres.repository.TallerRepository;
 import pe.edu.galaxy.training.java.ms.gestion.talleres.service.exception.ExceptionService;
 
@@ -49,12 +51,16 @@ public class TallerServiceImpl extends GenericServiceImpl implements TallerServi
 			Optional<TallerEntity> optTallerEntity = this.getTallerRepository().findById(tallerDTO.getId());
 
 			if (optTallerEntity == null) {
-				return null;
+				return Optional.empty();
 			}
-			TallerDTO oTallerDTO = this.getTallerDTO(optTallerEntity.get());
-			Optional<TallerDTO> optTallerDTO = Optional.of(oTallerDTO);
+			
+			if (optTallerEntity.isPresent()) {
+				TallerDTO oTallerDTO = this.getTallerDTO(optTallerEntity.get());
+				Optional<TallerDTO> optTallerDTO = Optional.of(oTallerDTO);
 
-			return optTallerDTO;
+				return optTallerDTO;
+			}
+			return Optional.empty();
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -108,19 +114,30 @@ public class TallerServiceImpl extends GenericServiceImpl implements TallerServi
 	}
 
 	private TallerDTO getTallerDTO(TallerEntity tallerEntity) {
-
 		TallerDTO tallerDTO = new TallerDTO();
+		
 		BeanUtils.copyProperties(tallerEntity, tallerDTO);
+		
+		TallerSituacionEntity tallerSituacionEntity=  tallerEntity.getTallerSituacion();	
+		TallerSituacionDTO tallerSituacionDTO = new TallerSituacionDTO();
+		BeanUtils.copyProperties(tallerSituacionEntity, tallerSituacionDTO);
+		tallerDTO.setTallerSituacion(tallerSituacionDTO);
+		
+		
 		return tallerDTO;
-
 	}
 
 	private TallerEntity getTallerEntity(TallerDTO tallerDTO) {
-
 		TallerEntity tallerEntity = new TallerEntity();
 		BeanUtils.copyProperties(tallerDTO, tallerEntity);
+		
+		TallerSituacionDTO tallerSituacionDTO =  tallerDTO.getTallerSituacion();	
+		TallerSituacionEntity tallerSituacionEntity = new TallerSituacionEntity();
+		BeanUtils.copyProperties(tallerSituacionDTO, tallerSituacionEntity);
+		tallerEntity.setTallerSituacion(tallerSituacionEntity);
+		
+		
 		return tallerEntity;
-
 	}
 
 }

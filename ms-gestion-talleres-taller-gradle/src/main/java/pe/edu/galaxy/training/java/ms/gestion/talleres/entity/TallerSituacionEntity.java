@@ -8,13 +8,20 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Table(name = "TALLER_SITUACION")
 @Entity(name = "TallerSituacionEntity")
+@SuperBuilder
 @EqualsAndHashCode(callSuper = false)
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TallerSituacionEntity extends GenericEntity {
 
 	private static final long serialVersionUID = 7104614957659217246L;
